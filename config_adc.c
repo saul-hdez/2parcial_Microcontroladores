@@ -9,14 +9,10 @@
 #include "config_adc.h"
 
 void adcInit( void ) {
-	//(ref_compensation, ref_sel)
-	adcREFCTRL( NULL, 0x0 );
-	//(adjust_res, num_samples)
-	adcAVGCTRL( NULL, 0x0 );
-	//(prescaler, resolution, correction, mode, adjust, differential)
-	adcCTRLB( NULL, 0x0, NULL, 0x1, 0x1, 0x0 );
-	//(gain, in_offset, in_scan, neg_mux, positive_mux)
-	adcINPUTCTRL( 0x0, NULL, NULL, 0x18, 0x18 );
+	adcREFCTRL( NULL, ADC_REFCTRL_REFSEL_AREFA_Val  );
+	adcAVGCTRL( NULL, ADC_AVGCTRL_SAMPLENUM_1_Val );
+	adcCTRLB( NULL, ADC_CTRLB_RESSEL_10BIT_Val, NULL, 1, 0, NULL );
+	adcINPUTCTRL( ADC_INPUTCTRL_GAIN_1X_Val, NULL, NULL, ADC_INPUTCTRL_MUXNEG_IOGND_Val, ADC_INPUTCTRL_MUXPOS_PIN10_Val );
 }
 
 void adcREFCTRL( uint8_t ref_compensation, uint8_t ref_sel ) {

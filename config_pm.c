@@ -11,6 +11,7 @@ void pmInit() {
 	//APBC clock for SERCOM0 is enabled, APBA clock for EIC is enabled
 	pmAPBCMASK( PM_APBCMASK_SERCOM0 | PM_APBCMASK_ADC | PM_APBCMASK_TC3); 
 	pmAPBAMASK( PM_APBAMASK_EIC);
+	pmAPBAMASK( PM_APBCMASK_TCC0);
 }
 
 void pmAPBCMASK( uint32_t value) {

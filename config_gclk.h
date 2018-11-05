@@ -12,6 +12,9 @@
 
 void gclkInit( );
 void gclkCLKCTRL( uint16_t lock,  uint16_t enable, uint16_t generator, uint16_t id );
+void resetTCCModule(void);
+void configureTCC(void);
+void pwmInit(void);
 
 #define myGclkInit gclkInit
 

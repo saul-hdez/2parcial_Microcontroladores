@@ -9,7 +9,7 @@
 #include "ad_converter.h"
 
 void adcEnable( void ) {
-	if( ADC->INPUTCTRL.bit.MUXPOS == ADC_INPUTCTRL_MUXPOS_TEMP_Val )
+	if( ADC->INPUTCTRL.bit.MUXPOS == ADC_INPUTCTRL_MUXPOS_PIN10_Val )
 		adcSampling( 0x3F ); //maximum sampling time when temperature sensor is selected
 	ADC->CTRLA.reg |= ADC_CTRLA_ENABLE; //ADC enable
 	while( ADC->STATUS.bit.SYNCBUSY ){ } //wait until I2C is enabled
@@ -18,9 +18,9 @@ void adcEnable( void ) {
 uint16_t adcResult( ) {
 	adcFlush( ); //flush the ADC pipeline to restart a new conversion
 	while( !ADC->INTFLAG.bit.RESRDY ) { } //wait until the conversion is ended
-	uint16_t temp = ADC->RESULT.reg; //read the ADC conversion value
+	uint16_t adcVal = ADC->RESULT.reg; //read the ADC conversion value
 	while( ADC->STATUS.bit.SYNCBUSY ){ } //wait until read synchronization is ready
-	return temp; //return the ADC conversion value
+	return adcVal; //return the ADC conversion value
 }
 
 void adcFlush( ) {

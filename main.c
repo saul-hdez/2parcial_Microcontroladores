@@ -43,20 +43,13 @@ int main( void )
 	//...
 	//STEP 6. Clear the peripheral FLAGs and enable the peripheral
 	mySercom0Enable( );	
+	
+	resetTCCModule();
+	configureTCC();
+	pwmInit();
     while( 1 ) 
 	{
-		//STEP 7. Transmit and receive DATA
-		//Transmit and receive all desired characters
-		mySpiXchg8bit( send_data, SIZE, receive_data );
-		if (receive_data[0] ==5)
-		{
-			myPortOut(0, PORT_OUTCLR_OFFSET, PORT_PA27 ); //Tx Off
-			delay();
-		}
-		else 
-		{
-		 myPortOut(0,PORT_OUTSET_OFFSET, PORT_PA27); //Tx On
-		}
+		
     }
 
 }
